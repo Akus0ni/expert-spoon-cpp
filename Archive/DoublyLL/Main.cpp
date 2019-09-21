@@ -14,7 +14,16 @@ int main(int argc, char const *argv[])
 	{
 		system("clear");
 		cout<<endl<<setw(75)<<"%%%%%%%%%%%%%%%%%%%%%%``Menu``%%%%%%%%%%%%%%%%%%%%%%"<<endl;
-		cout<<"\n1. Add Item at the beginning.\n2. Add Item at the end.\n3. Add Item InBetween.\n4. Delete Item from Begin.\n5. Delete Item from End.\n6. Delete Item from InBetween.\n7. Print Reverse of The Items List.\n8. Size of the List.\n9. Display the list.\n10. Exit\n";
+		cout<<"\n1. Add Item at the beginning.";
+		cout<<"\n2. Add Item at the end.";
+		cout<<"\n3. Add Item InBetween.";
+		cout<<"\n4. Delete Item from Begin.";
+		cout<<"\n5. Delete Item from End.";
+		cout<<"\n6. Delete Item from InBetween.";
+		cout<<"\n7. Print Reverse of The Items List.";
+		cout<<"\n8. Size of the List.";
+		cout<<"\n9. Display the list.\n";
+		cout<<"10. Exit\n";
 		cout<<"\nEnter Your Choice: ";
 		cin>>choice;
 

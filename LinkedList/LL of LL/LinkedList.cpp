@@ -1,5 +1,5 @@
 #include"LinkedList.h"
-#include<typeinfo>
+
 
 template<class T>
 LinkedList<T>::LinkedList():head(nullptr),tail(nullptr),count(0)
@@ -24,22 +24,28 @@ bool LinkedList<T>::AddAtEnd(T data)
 {
 	bool bSucc = false;
 	Node<T>* temp = new Node<T>;
-	temp->SetData(data);
-	temp->SetNext(nullptr);
-	if(IsEmpty())
+	if(temp == nullptr || temp == NULL)
 	{
-		head = tail = temp;
-		bSucc = true;
+		throw runtime_error("Memory Not Allocated");
 	}
 	else
 	{
-		tail->SetNext(temp);
-		tail = temp;
-		bSucc = true;
+		temp->SetData(data);
+		temp->SetNext(nullptr);
+		if(IsEmpty())
+		{
+			head = tail = temp;
+			bSucc = true;
+		}
+		else
+		{
+			tail->SetNext(temp);
+			tail = temp;
+			bSucc = true;
+		}
+		count++;
+		return bSucc;
 	}
-	count++;
-	return bSucc;
-	
 }
 
 
@@ -72,7 +78,7 @@ void LinkedList<T>::Display() const
 	Node<T>* temp = head;
 	while(temp!=nullptr)
 	{
-			cout<<temp<<"-->";
+			cout<<temp->GetData();
 			temp = temp->GetNext();
 	}
 	cout<<"NULL"<<endl;
@@ -250,170 +256,7 @@ LinkedList<T>::~LinkedList()
 }
 
 
-template<class T>
-void LinkedList<T>::Merge(LinkedList<T> &l2)
-{
-	if(!IsEmpty() && !l2.IsEmpty())
-	{
-		//Node<T>* p = this->head;
-		//Node<T>* q = l2.head;
-		Node<T>* nHead = nullptr;
-		Node<T>* nTail = nullptr;
-		
-		if(head->GetData() < l2.head->GetData())
-		{
-			nHead = head;
-			nTail = head;
-			this->head = this->head->GetNext();
-			//p = this->head;
-		}
-		else{
-			nHead = l2.head;
-			nTail = l2.head;
-			l2.head = l2.head->GetNext();
-		}
-		
-		while(this->head != nullptr && l2.head != nullptr)
-		{
-			if(head->GetData() < l2.head->GetData())
-			{
-				nTail->SetNext(head);
-				nTail = head;
-				this->head = this->head->GetNext();
-			}
-			else{
-				nTail->SetNext(l2.head);
-				nTail = l2.head;
-				l2.head = l2.head->GetNext();
-			}
-		
-		}
-		if(head == nullptr)
-		{
-			nTail->SetNext(l2.head);
-			tail = l2.tail;
-		}
-		else{
-			nTail->SetNext(head);
-		}
-		head = nHead;
-	}
-}
 
-
-
-
-
-
-
-
-
-template<class T>
-void LinkedList<T>::Sorting()
-{
-	if(count>=2)
-	{
-		T ele;
-		Node<T>* p = head;
-		Node<T>* q = head->GetNext();
-		while(p != nullptr)
-		{
-			while(q != nullptr)
-			{
-				if(p->GetData() > q->GetData())
-				{
-					ele = q->GetData();
-					q->SetData(p->GetData());
-					p->SetData(ele);
-					q = q->GetNext();
-				}
-				else{
-					q = q->GetNext();
-				}
-			}
-			p = p->GetNext();
-			if(p!=nullptr)
-				q = p->GetNext();
-		}
-	}
-	
-}
-
-
-
-
-
-template<class T>
-void LinkedList<T>::AddInsert()
-{
-	if(count>=2)
-	{
-		if(typeid(T) == typeid(int))
-		{
-			Node<T>* p = head;
-			Node<T>* q = head->GetNext();
-			
-			while(q!= nullptr)
-			{
-				Node<T>* t = new Node<T>;
-				T res;
-				res = p->GetData() + q->GetData();
-				t->SetData(res);
-				t->SetNext(q->GetNext());
-				q->SetNext(t);
-				count++;
-				if(t->GetNext() == nullptr)
-				{
-					tail = t;
-					return;
-				}
-				p = p->GetNext()->GetNext()->GetNext();
-				q = q->GetNext()->GetNext()->GetNext();
-			}
-		}
-	}
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-template<class T>
-Node<T>* LinkedList<T>::SortedMerge(Node<T>* h1,Node<T>* h2)
-{
-	if(h1==nullptr)	return h2;
-	else if(h2 == nullptr)	return h1;
-	
-	if(h1->data);
-}
-
-template<class T>
-bool LinkedList<T>::MergeSort(LinkedList<T> &ll2)
-{
-	if(this->head == nullptr || this->head == this->tail || ll2.head == nullptr || ll2.head == ll2.tail)	return false;
-	
-	bool res = false;
-	this->head = SortedMerge(this->head, ll2.head);
-	res = true;
-	return res;
-}*/
 
 
 
